@@ -6,10 +6,9 @@ import {
   checkPassword,
   createSecureToken,
   methodNotAllowed,
-} from 'next-basics';
+} from 'next-basics/dist/esm';
 import redis from '@umami/redis-client';
 import { getUser } from 'queries';
-import { NextApiRequestQueryBody, User } from 'lib/types';
 import { setAuthKey } from 'lib/auth';
 
 export interface LoginRequestBody {
@@ -19,13 +18,10 @@ export interface LoginRequestBody {
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user: any;
 }
 
-export default async (
-  req: NextApiRequestQueryBody<any, LoginRequestBody>,
-  res: NextApiResponse<LoginResponse>,
-) => {
+export default async (req: any, res: NextApiResponse<LoginResponse>) => {
   if (req.method === 'POST') {
     const { username, password } = req.body;
 
