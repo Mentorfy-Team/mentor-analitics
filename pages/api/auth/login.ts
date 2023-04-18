@@ -9,7 +9,6 @@ import {
 } from 'next-basics';
 import redis from '@umami/redis-client';
 import { getUser } from 'queries';
-import { secret } from 'lib/crypto';
 import { NextApiRequestQueryBody, User } from 'lib/types';
 import { setAuthKey } from 'lib/auth';
 
@@ -43,7 +42,7 @@ export default async (
         return ok(res, { token, user });
       }
 
-      const token = createSecureToken({ userId: user.id }, secret());
+      const token = createSecureToken({ userId: user.id }, '2fe5f26456cdc87007e7adf0ae7da3ad');
 
       return ok(res, {
         token,
